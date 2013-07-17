@@ -10,7 +10,7 @@ if (exists('g:cursorcross_disable') && g:cursorcross_disable) || &cp
 endif
 
 if !exists('g:cursorcross_dynamic')
-  let g:cursorcross_dynamic = 0
+  let g:cursorcross_dynamic = 1
 endif
 
 if !exists('g:cursorcross_debug')
@@ -18,7 +18,7 @@ if !exists('g:cursorcross_debug')
 endif
 
 if !exists('g:cursorcross_mappings')
-  let g:cursorcross_mappings = 0
+  let g:cursorcross_mappings = 1
 endif
 
 " Initialization:
