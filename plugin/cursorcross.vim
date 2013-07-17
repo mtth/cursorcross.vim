@@ -56,9 +56,10 @@ endfunction
 
 function! s:set_cursorcross(column, line, message)
   if g:cursorcross_debug
-    echomsg a:message
+    echomsg a:message . ' ' . &ft
   endif
-  if s:cursorcross
+  if s:cursorcross && &ft !=# 'qf'
+    " cursorline hides quickfix window highlighting
     if a:line
       set cursorline
     else
