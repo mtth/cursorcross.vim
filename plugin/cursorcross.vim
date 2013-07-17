@@ -3,15 +3,11 @@
 " Dynamic cursorcolumn and cursorline updates.
 
 
-" Safety:
+" Options:
 
-if exists('loaded_cursorcross') || &cp
+if (exists('g:cursorcross_disable') && g:cursorcross_disable) || &cp
     finish
 endif
-let loaded_cursorcross=1
-
-
-" Options:
 
 if !exists('g:cursorcross_dynamic')
   let g:cursorcross_dynamic = 0
