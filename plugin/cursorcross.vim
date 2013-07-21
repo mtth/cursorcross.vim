@@ -46,7 +46,7 @@ function! s:is_exception(ftype)
   return 0
 endfunction
 
-function! s:toggle_cursorcross(force, ...)
+function! s:toggle_cursorcross(force, verbose,  ...)
   if a:0
     let s:cursorcross_save = s:cursorcross
     let s:cursorcross = a:1
@@ -58,12 +58,15 @@ function! s:toggle_cursorcross(force, ...)
       let s:cursorcross = !s:cursorcross
     endif
   endif
-  if a:force && s:cursorcross
-    set cursorline
-    set nocursorcolumn
-  else
-    set nocursorline
-    set nocursorcolumn
+  if a:force
+    call s:set_cursorcross(0, 1, 'toggle')
+  endif
+  if a:verbose
+    if s:cursorcross
+      echo 'cursorcross'
+    else
+      echo 'nocursorcross'
+    endif
   endif
 endfunction
 
@@ -105,15 +108,15 @@ augroup END
 
 " Commands:
 
-command! -bang -nargs=0 CursorcrossToggle call <SID>toggle_cursorcross(<bang>0)
-command! -nargs=0 CursorcrossOff call <SID>toggle_cursorcross(1, 0)
-command! -nargs=0 CursorcrossOn call <SID>toggle_cursorcross(1, 1)
+command! -bang -nargs=0 CursorcrossToggle call <SID>toggle_cursorcross(<bang>0, 0)
+command! -nargs=0 CursorcrossOff call <SID>toggle_cursorcross(1, 0, 0)
+command! -nargs=0 CursorcrossOn call <SID>toggle_cursorcross(1, 0, 1)
 
 
 " Mappings:
 
 if g:cursorcross_mappings
-  nnoremap <silent> + :call <SID>toggle_cursorcross(1)<cr>
+  nnoremap <silent> + :call <SID>toggle_cursorcross(1, 1)<cr>
   noremap - :set cursorline!<cr>
   nnoremap \| :set cursorcolumn!<cr>
   vnoremap \| <esc>:set cursorcolumn!<cr>gv
