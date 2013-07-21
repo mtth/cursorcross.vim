@@ -6,7 +6,7 @@
 " Options:
 
 if (exists('g:cursorcross_disable') && g:cursorcross_disable) || &cp
-    finish
+  finish
 endif
 
 if !exists('g:cursorcross_dynamic')
@@ -21,6 +21,10 @@ if !exists('g:cursorcross_mappings')
   let g:cursorcross_mappings = 1
 endif
 
+if !exists('g:cursorcross_exceptions')
+  let g:cursorcross_exceptions = []
+endif
+
 " Initialization:
 
 if g:cursorcross_dynamic
@@ -32,6 +36,15 @@ endif
 
 
 " Functions:
+
+function! s:is_exception(ftype)
+  for exception in g:cursorcross_exceptions
+    if a:ftype ==# exception
+      return 1
+    endif
+  endfor
+  return 0
+endfunction
 
 function! s:toggle_cursorcross(...)
   if a:0
@@ -58,7 +71,7 @@ function! s:set_cursorcross(column, line, message)
   if g:cursorcross_debug
     echomsg a:message . ' ' . &ft
   endif
-  if s:cursorcross && &ft !=# 'qf'
+  if s:cursorcross && !s:is_exception(&ft)
     " cursorline hides quickfix window highlighting
     if a:line
       set cursorline
@@ -82,7 +95,7 @@ endfunction
 augroup cursorgroup
   " BufWinEnter seems to be executed last (i.e. for the quickfix window, after nomodifiable has been set)
   autocmd!
-  autocmd   BufWinEnter                 *                   call <SID>set_cursorcross(0, 1, 'bufwinenter')
+  autocmd   FileType                    *                   call <SID>set_cursorcross(0, 1, 'filetype')
   autocmd   InsertEnter                 *                   call <SID>set_cursorcross(1, 0, 'insertenter')
   autocmd   InsertLeave                 *                   call <SID>set_cursorcross(0, 1, 'insertleave')
   autocmd   WinEnter                    *                   call <SID>set_cursorcross(0, 1, 'winenter')
