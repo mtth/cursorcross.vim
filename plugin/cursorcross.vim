@@ -1,6 +1,5 @@
 " plugin/cursorcross.vim
 
-
 if (exists('g:cursorcross_disable') && g:cursorcross_disable) || &cp
   finish
 endif
@@ -21,12 +20,12 @@ endif
 
 augroup cursorgroup
   autocmd!
-  autocmd   BufEnter                    *                   call cursorcross#on_enter()
-  autocmd   FileType                    *                   call cursorcross#on_enter()
-  autocmd   InsertEnter                 *                   call cursorcross#on_insert('enter')
-  autocmd   InsertLeave                 *                   call cursorcross#on_insert('leave')
-  autocmd   WinEnter                    *                   call cursorcross#on_enter()
-  autocmd   WinLeave                    *                   call cursorcross#on_leave()
+  autocmd BufEnter * silent call cursorcross#on_enter()
+  autocmd FileType * silent call cursorcross#on_enter()
+  autocmd InsertEnter * silent call cursorcross#on_insert('enter')
+  autocmd InsertLeave * silent call cursorcross#on_insert('leave')
+  autocmd WinEnter * silent call cursorcross#on_enter()
+  autocmd WinLeave * silent call cursorcross#on_leave()
 augroup END
 
 
