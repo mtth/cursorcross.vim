@@ -9,6 +9,7 @@ Features
 
 * Window specific ``cursorcolumn`` and ``cursorline`` states.
 * Implements *dynamic mode* which automatically sets:
+
   * ``cursorcolumn`` and ``nocursorline`` in insert mode
   * ``nocursorcolumn`` and ``cursorline`` in normal mode
 
@@ -31,11 +32,11 @@ Configuration
 
 Four options are available:
 
-* ``g:cursorcross_disable``, disable the plugin [default: 0]
-* ``g:cursorcross_dynamic``, turn on dynamic mode when VIM starts [default: 1]
-* ``g:cursorcross_exceptions``, list of filetypes where dynamic mode will be 
-  disabled [default: []].
-* ``g:cursorcross_mappings``, create the following mappings [default: 1]:
+* ``g:cursorcross_disable = 0``, disable the plugin>
+* ``g:cursorcross_dynamic = 1``, turn on dynamic mode when VIM starts.
+* ``g:cursorcross_exceptions = []``, list of filetypes where dynamic mode will 
+  be disabled.
+* ``g:cursorcross_mappings = 1``, create the following mappings:
 
   * ``-`` to toggle ``cursorline``
   * ``|`` to toggle ``cursorcolumn``
