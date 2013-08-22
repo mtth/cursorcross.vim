@@ -51,13 +51,3 @@ function! cursorcross#toggle_dynamic_mode(...)
   let prefix = g:cursorcross_dynamic ? '' : 'no'
   echo prefix . 'dynamic'
 endfunction
-
-augroup cursorcross
-  autocmd!
-  autocmd BufEnter * silent call cursorcross#on_enter()
-  autocmd FileType * silent call cursorcross#on_enter()
-  autocmd InsertEnter * silent call cursorcross#on_insert('enter')
-  autocmd InsertLeave * silent call cursorcross#on_insert('leave')
-  autocmd WinEnter * silent call cursorcross#on_enter()
-  autocmd WinLeave * silent call cursorcross#on_leave()
-augroup END
