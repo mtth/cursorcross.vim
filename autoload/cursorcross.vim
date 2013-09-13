@@ -9,6 +9,12 @@ function! s:is_dynamic()
   return g:cursorcross_dynamic && match(g:cursorcross_exceptions, &filetype) ==# -1
 endfunction
 
+function! s:is_at_beginning_of_line()
+  " check if cursor is at beginning of line
+  let cursor_column = col('.')
+  return cursor_column ==# 1 || match(getline('.')[:cursor_column - 2], '^\s*$') ==# 0
+endfunction
+
 function! cursorcross#on_enter()
   " restore highlighting if possible, else do default
   let cur_bufnr = bufnr('%')
@@ -30,7 +36,10 @@ function! cursorcross#on_insert(direction)
   " if entering, cursorline; if leaving, cursorcolumn
   if s:is_dynamic()
     if a:direction ==# 'enter'
-      setlocal cursorcolumn
+      let cursor_column = col('.')
+      if s:is_at_beginning_of_line()
+        setlocal cursorcolumn
+      endif
       setlocal nocursorline
     elseif a:direction ==# 'leave'
       setlocal nocursorcolumn
@@ -38,6 +47,15 @@ function! cursorcross#on_insert(direction)
     else
       throw 'Invalid direction.'
     endif
+  endif
+endfunction
+
+function! cursorcross#on_char_insert()
+  " enable cursorcolumn if at beginning of line else deactivate
+  if match(v:char, '\s') >=# 0 && s:is_at_beginning_of_line()
+    setlocal cursorcolumn
+  else
+    setlocal nocursorcolumn
   endif
 endfunction
 
