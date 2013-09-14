@@ -1,12 +1,11 @@
 " plugin/cursorcross.vim
 
-
-if (exists('g:cursorcross_disable') && g:cursorcross_disable) || &compatible
+if (exists('g:cursorcross_disable') && g:cursorcross_disable) || v:version < 704 || &compatible
   finish
 endif
 
 if !exists('g:cursorcross_dynamic')
-  let g:cursorcross_dynamic = 0
+  let g:cursorcross_dynamic = 'cl'
 endif
 if !exists('g:cursorcross_exceptions')
   let g:cursorcross_exceptions = []
@@ -30,10 +29,10 @@ augroup cursorcross
 augroup END
 
 inoremap <expr> <cr> cursorcross#on_enter_insert()
+inoremap <expr> <bs> cursorcross#on_backspace()
 
 if g:cursorcross_mappings
-  nnoremap <silent> + :call cursorcross#toggle_dynamic_mode()<cr>
   noremap - :set cursorline!<cr>
   nnoremap \| :set cursorcolumn!<cr>
-  vnoremap \| <esc>:set cursorcolumn!<cr>gv
+  xnoremap \| <esc>:set cursorcolumn!<cr>gv
 endif
