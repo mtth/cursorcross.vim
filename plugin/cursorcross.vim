@@ -14,9 +14,6 @@ if !exists('g:cursorcross_mappings')
   let g:cursorcross_mappings = 1
 endif
 
-command! -bang -nargs=0 CursorcrossToggle call cursorcross#toggle_dynamic_mode()
-command! -nargs=0 CursorcrossRestore call cursorcross#on_enter()
-
 augroup cursorcross
   autocmd!
   autocmd BufEnter * silent call cursorcross#on_enter()
