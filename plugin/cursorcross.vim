@@ -24,10 +24,12 @@ augroup cursorcross
   autocmd FileType * silent call cursorcross#on_enter()
   autocmd InsertEnter * silent call cursorcross#on_insert('enter')
   autocmd InsertLeave * silent call cursorcross#on_insert('leave')
-  autocmd InsertCharPre * call cursorcross#on_char_insert()
+  autocmd InsertCharPre * silent call cursorcross#on_char_insert()
   autocmd WinEnter * silent call cursorcross#on_enter()
   autocmd WinLeave * silent call cursorcross#on_leave()
 augroup END
+
+inoremap <expr> <cr> cursorcross#on_enter_insert()
 
 if g:cursorcross_mappings
   nnoremap <silent> + :call cursorcross#toggle_dynamic_mode()<cr>

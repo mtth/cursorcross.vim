@@ -59,6 +59,14 @@ function! cursorcross#on_char_insert()
   endif
 endfunction
 
+function! cursorcross#on_enter_insert()
+  " <cr> doesn't trigger InsertCharPre so we handle it separately
+  if s:is_dynamic()
+    setlocal cursorcolumn
+  endif
+  return "\<cr>"
+endfunction
+
 function! cursorcross#toggle_dynamic_mode(...)
   " toggle dynamic mode
   if a:0
