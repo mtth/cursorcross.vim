@@ -5,7 +5,7 @@ if (exists('g:cursorcross_disable') && g:cursorcross_disable) || v:version < 704
 endif
 
 if !exists('g:cursorcross_dynamic')
-  let g:cursorcross_dynamic = 'cl'
+  let g:cursorcross_dynamic = 'clw'
 endif
 if !exists('g:cursorcross_exceptions')
   let g:cursorcross_exceptions = []

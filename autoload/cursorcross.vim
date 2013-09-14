@@ -21,7 +21,7 @@ endfunction
 
 function! cursorcross#on_enter()
   " restore highlighting if possible, else do default
-  if s:is_active()
+  if s:is_active() && s:is_dynamic('w')
     let cur_bufnr = bufnr('%')
     if has_key(s:cursorcross_state, cur_bufnr)
       let [&l:cursorcolumn, &l:cursorline] = s:cursorcross_state[cur_bufnr]
@@ -33,14 +33,10 @@ endfunction
 
 function! cursorcross#on_leave()
   " remove all highlighting and store state
-  if s:is_active()
+  if s:is_active() && s:is_dynamic('w')
     let s:cursorcross_state[bufnr('%')] = [&cursorcolumn, &cursorline]
-    if s:is_dynamic('c')
-      setlocal nocursorcolumn
-    endif
-    if s:is_dynamic('l')
-      setlocal nocursorline
-    endif
+    setlocal nocursorcolumn
+    setlocal nocursorline
   endif
 endfunction
 

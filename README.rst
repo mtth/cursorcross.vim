@@ -4,29 +4,24 @@ Cursorcross.vim
 Refreshingly sane ``cursorcolumn`` and ``cursorline`` handling.
 
 
-Features
---------
-
-* Window specific ``cursorcolumn`` and ``cursorline`` states.
-* Implements *dynamic mode* which automatically sets:
-
-  * ``cursorcolumn`` and ``nocursorline`` in insert mode
-  * ``nocursorcolumn`` and ``cursorline`` in normal mode
-
-When leaving a window both options are turned off, and are restored when 
-revisiting that window. This way a single window has cursor highlighting at 
-any given time, which makes it much easier to find the currently active one.
-
-
 Configuration
 -------------
 
 Four options are available:
 
-* ``g:cursorcross_disable = 0``, disable the plugin.
-* ``g:cursorcross_dynamic = 'cl'``, dynamically handle both features.
+* ``g:cursorcross_dynamic = 'clw'``, which features to dynamically handle:
+
+  * :code:`'c'` triggers :code:`cursorcolumn` in insert mode when the cursor 
+    is at the beginning of the line.
+  * :code:`'l'` activates :code:`cursorline` in normal mode and turns it off 
+    when entering insert mode.
+  * :code:`'w'` automatically disables :code:`cursorcolumn` and 
+    :code:`cursorline` in non-focused windows. When entering a window, both 
+    variables are restored to their previous state.
+
 * ``g:cursorcross_exceptions = []``, list of filetypes where dynamic mode will 
   be disabled.
+* ``g:cursorcross_disable = 0``, disable the plugin.
 * ``g:cursorcross_mappings = 1``, create the following mappings:
 
   * ``-`` to toggle ``cursorline``.
