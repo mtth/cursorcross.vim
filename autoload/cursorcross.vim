@@ -5,7 +5,7 @@ let s:cursorcross_state = {}
 
 function! s:is_active()
   " check if the current buffer is among the exceptions
-  return (!&filetype || match(g:cursorcross_exceptions, &filetype) ==# -1) && !&buftype
+  return (!strlen(&filetype) || match(g:cursorcross_exceptions, &filetype) ==# -1) && !strlen(&buftype)
 endfunction
 
 function! s:is_dynamic(key)
