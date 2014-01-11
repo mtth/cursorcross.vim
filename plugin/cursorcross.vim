@@ -25,7 +25,17 @@ augroup cursorcross
   autocmd WinLeave * silent call cursorcross#on_leave()
 augroup END
 
-inoremap <expr> <cr> cursorcross#on_enter_insert()
+inoremap <silent> <SID>CursorCrossCR  <C-R>=cursorcross#on_enter_insert()<CR>
+imap     <script> <Plug>CursorCrossCR <SID>CursorCrossCR
+
+" Forward any existing CR maps, based on endwise's code
+if maparg('<CR>','i') =~ '<CR>'
+  exe "imap <script> <CR>      ".maparg('<CR>','i')."<Plug>CursorCrossCR"
+elseif maparg('<CR>','i') =~ '<Plug>\w\+CR'
+  exe "imap <CR> ".maparg('<CR>', 'i')."<Plug>CursorCrossCR"
+else
+  imap <CR>      <Plug>CursorCrossCR
+endif
 inoremap <expr> <bs> cursorcross#on_backspace()
 
 if g:cursorcross_mappings
