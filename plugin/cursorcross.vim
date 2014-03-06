@@ -68,8 +68,8 @@ call s:setup_map('CR')
 call s:setup_map('BS')
 
 if g:cursorcross_mappings
-  noremap  <unique> -  :set cursorline!<cr>
-  nnoremap <unique> \| :set cursorcolumn!<cr>
-  xnoremap <unique> \| <esc>:set cursorcolumn!<cr>gv
+  noremap  -  :set cursorline!<cr>
+  nnoremap \| :set cursorcolumn!<cr>
+  xnoremap \| <esc>:set cursorcolumn!<cr>gv
 endif
 " }}}1
