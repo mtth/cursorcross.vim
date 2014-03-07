@@ -80,6 +80,7 @@ function! cursorcross#on_enter_insert()
   if s:is_active() && s:is_dynamic('c')
     setlocal cursorcolumn
   endif
+  return ''
 endfunction
 
 function! cursorcross#on_backspace()
@@ -87,4 +88,5 @@ function! cursorcross#on_backspace()
   if s:is_active() && s:is_dynamic('c') && s:is_at_beginning_of_line(1)
     setlocal cursorcolumn
   endif
+  return ''
 endfunction

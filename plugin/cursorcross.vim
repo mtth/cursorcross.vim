@@ -26,9 +26,9 @@ augroup cursorcross
 augroup END
 
 " Mappings {{{1
-inoremap <silent> <SID>CursorCrossCR  <C-O>call cursorcross#on_enter_insert()<CR>
+inoremap <silent> <SID>CursorCrossCR  <C-R>=cursorcross#on_enter_insert()<CR>
 imap     <script> <Plug>CursorCrossCR <SID>CursorCrossCR
-inoremap <silent> <SID>CursorCrossBS  <C-O>call cursorcross#on_backspace()<CR>
+inoremap <silent> <SID>CursorCrossBS  <C-R>=cursorcross#on_backspace()<CR>
 imap     <script> <Plug>CursorCrossBS <SID>CursorCrossBS
 
 " Forward any existing CR maps, initially based on endwise's code.
