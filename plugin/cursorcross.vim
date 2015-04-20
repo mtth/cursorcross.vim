@@ -16,13 +16,17 @@ endif
 
 augroup cursorcross
   autocmd!
-  autocmd BufEnter * silent call cursorcross#on_enter()
-  autocmd FileType * silent call cursorcross#on_enter()
+  " Skip BufEnter/FileType during startup, which could trigger it for multiple
+  " windows.
+  autocmd BufEnter * if !has('vim_starting') | silent call cursorcross#on_enter() | endif
+  autocmd FileType * if !has('vim_starting') | silent call cursorcross#on_enter() | endif
   autocmd InsertEnter * silent call cursorcross#on_insert('enter')
   autocmd InsertLeave * silent call cursorcross#on_insert('leave')
   autocmd InsertCharPre * silent call cursorcross#on_char_insert()
   autocmd WinEnter * silent call cursorcross#on_enter()
   autocmd WinLeave * silent call cursorcross#on_leave()
+  " Handle opening Vim with a single window.
+  autocmd VimEnter * silent call cursorcross#on_enter()
 augroup END
 
 " Mappings {{{1
