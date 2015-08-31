@@ -19,7 +19,6 @@ augroup cursorcross
   " Skip BufEnter/FileType during startup, which could trigger it for multiple
   " windows.
   autocmd BufEnter * if !has('vim_starting') | silent call cursorcross#on_enter() | endif
-  autocmd FileType * if !has('vim_starting') | silent call cursorcross#on_enter() | endif
   autocmd InsertEnter * silent call cursorcross#on_insert('enter')
   autocmd InsertLeave * silent call cursorcross#on_insert('leave')
   autocmd InsertCharPre * silent call cursorcross#on_char_insert()
