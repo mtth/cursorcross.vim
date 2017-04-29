@@ -28,6 +28,8 @@ augroup cursorcross
   autocmd VimEnter * silent call cursorcross#on_enter()
 augroup END
 
+command! -nargs=0 CursorcrossToggle call cursorcross#toggle()
+
 " Mappings {{{1
 inoremap <silent> <SID>CursorCrossCR  <C-R>=cursorcross#on_enter_insert()<CR>
 imap     <script> <Plug>CursorCrossCR <SID>CursorCrossCR

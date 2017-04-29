@@ -26,3 +26,6 @@ Four options are available:
 
   * ``-`` to toggle ``cursorline``.
   * ``|`` to toggle ``cursorcolumn``.
+
+Additionally, the `CursorcrossToggle` command can be used to disable all 
+dynamic modes globally.

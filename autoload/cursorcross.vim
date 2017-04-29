@@ -2,10 +2,14 @@
 
 " dictionary of [cursorcolumn, cursorline] states indexed by buffer number
 let s:cursorcross_state = {}
+" whether the plugin is active or has been disabled
+let s:cursorcross_active = 1
 
 function! s:is_active()
   " check if the current buffer is among the exceptions
-  return (!strlen(&filetype) || match(g:cursorcross_exceptions, &filetype) ==# -1) && !strlen(&buftype)
+  return
+  \ (!strlen(&filetype) || match(g:cursorcross_exceptions, &filetype) ==# -1)
+  \ && !strlen(&buftype) && s:cursorcross_active
 endfunction
 
 function! s:is_dynamic(key)
@@ -17,6 +21,11 @@ function! s:is_at_beginning_of_line(padding)
   " check if cursor is at beginning of line
   let ccol = col('.') - a:padding
   return ccol ==# 1 || match(getline('.')[:ccol - 2], '^\s*$') ==# 0
+endfunction
+
+function! cursorcross#toggle()
+  " toggle plugin globally
+  let s:cursorcross_active = !s:cursorcross_active
 endfunction
 
 function! cursorcross#on_enter()
